@@ -1,58 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Reading List
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A clean and intuitive Laravel web application to keep track of books you want to read, are currently reading, or have finished. The application allows users to view all books, add new books with validation, edit existing books, delete books with confirmation, and filter books by their reading status without requiring user authentication.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Book Catalog:** View all tracked books displaying title, author, and reading status.
+- **Add Book:** Create a book entry with validation (`title` & `author` required, max 255 chars; `status` must be `to-read`, `reading`, or `finished`). Preserves input upon validation errors.
+- **Edit Book:** Update book details with the same robust validation and pre-filled current values.
+- **Delete Book:** Safely delete books with an `"Are you sure?"` confirmation dialog and `@method('DELETE')` form submission.
+- **Status Filter:** Instantly filter books by status (`All`, `To read`, `Reading`, `Finished`).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## How to Run the Application
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Follow these steps to run the application locally:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Clone the repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/kushal-Jain450/reading-list.git
+cd reading-list
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install dependencies
+```bash
+composer install
+```
 
-## Contributing
+### 3. Set up the environment file
+On Linux/macOS:
+```bash
+cp .env.example .env
+```
+On Windows PowerShell:
+```powershell
+Copy-Item .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Generate the application key
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+### 5. Prepare the SQLite database and run migrations
+Ensure the SQLite database file exists and execute the database migrations:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+On Linux/macOS:
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+On Windows PowerShell:
+```powershell
+if (!(Test-Path database/database.sqlite)) { New-Item -ItemType File -Path database/database.sqlite }
+php artisan migrate
+```
 
-## Security Vulnerabilities
+### 6. Start the local development server
+```bash
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Open your browser and navigate to:
+```
+http://127.0.0.1:8000
+```
+(Visiting `/` automatically redirects to `/books`).
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## AI Usage
+
+In accordance with assignment guidelines, AI assistance was utilized as follows:
+- **Project Scaffolding & Setup:** Used AI assistant to initialize the Laravel application configured with SQLite and set up Git repository tracking.
+- **Database & Architecture:** Used AI to generate the `Book` Eloquent model and migration schema with custom status defaults (`to-read`).
+- **Resource Routing & Controller Logic:** Used AI to draft resourceful controller methods (`index`, `create`, `store`, `edit`, `update`, `destroy`) adhering to Laravel conventions and validation rules.
+- **Blade Views & Styling:** Used AI to construct accessible Blade views (`index`, `create`, `edit`) using Tailwind CSS, implementing confirmation alerts for deletion, active state highlights for status filters, and error message handling with preserved old input.
+- **Testing & Verification:** Used AI to execute PHPUnit feature test cases ensuring all route responses and redirects perform accurately.
