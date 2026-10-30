@@ -23,6 +23,7 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Title</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Author</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold text-slate-600 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-200">
@@ -40,6 +41,9 @@
                                 @else
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">{{ $book->status }}</span>
                                 @endif
+                            </td>
+                            <td class="px-6 py-4 text-sm text-right font-medium">
+                                <a href="{{ route('books.edit', $book) }}" class="text-indigo-600 hover:text-indigo-900 transition">Edit</a>
                             </td>
                         </tr>
                     @endforeach
