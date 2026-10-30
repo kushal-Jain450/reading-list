@@ -11,6 +11,18 @@
         </a>
     </div>
 
+    <!-- Status Filters -->
+    <div class="flex items-center space-x-2 text-sm text-slate-600 bg-white p-3 rounded-lg border border-slate-200">
+        <span class="font-semibold text-slate-700 mr-2">Filter:</span>
+        <a href="{{ route('books.index') }}" class="px-3 py-1 rounded-md transition {{ empty($status) ? 'bg-indigo-600 text-white font-medium' : 'text-slate-600 hover:bg-slate-100' }}">All</a>
+        <span class="text-slate-300">&bull;</span>
+        <a href="{{ route('books.index', ['status' => 'to-read']) }}" class="px-3 py-1 rounded-md transition {{ $status === 'to-read' ? 'bg-indigo-600 text-white font-medium' : 'text-slate-600 hover:bg-slate-100' }}">To read</a>
+        <span class="text-slate-300">&bull;</span>
+        <a href="{{ route('books.index', ['status' => 'reading']) }}" class="px-3 py-1 rounded-md transition {{ $status === 'reading' ? 'bg-indigo-600 text-white font-medium' : 'text-slate-600 hover:bg-slate-100' }}">Reading</a>
+        <span class="text-slate-300">&bull;</span>
+        <a href="{{ route('books.index', ['status' => 'finished']) }}" class="px-3 py-1 rounded-md transition {{ $status === 'finished' ? 'bg-indigo-600 text-white font-medium' : 'text-slate-600 hover:bg-slate-100' }}">Finished</a>
+    </div>
+
     @if($books->isEmpty())
         <div class="bg-white border border-slate-200 rounded-lg p-8 text-center text-slate-500">
             <p class="text-lg">No books yet</p>
