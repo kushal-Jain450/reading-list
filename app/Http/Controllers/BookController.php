@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -30,7 +30,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'author' => 'required|max:255',
+            'status' => 'required|in:to-read,reading,finished',
+        ]);
+
+        Book::create($validated);
+
+        return redirect()->route('books.index')->with('success', 'Book added successfully.');
     }
 
     /**

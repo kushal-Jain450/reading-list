@@ -6,6 +6,9 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold text-slate-800">My Reading List</h1>
+        <a href="{{ route('books.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition">
+            + Add book
+        </a>
     </div>
 
     @if($books->isEmpty())
