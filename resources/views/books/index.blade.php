@@ -42,8 +42,13 @@
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">{{ $book->status }}</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 text-sm text-right font-medium">
+                            <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                                 <a href="{{ route('books.edit', $book) }}" class="text-indigo-600 hover:text-indigo-900 transition">Edit</a>
+                                <form action="{{ route('books.destroy', $book) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-rose-600 hover:text-rose-900 transition">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
